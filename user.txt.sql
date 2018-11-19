@@ -1,0 +1,10 @@
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, '﻿Рональд Рейнольдс', 'ronald.reynolds66@example.com', 'paco');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Дарлин Эдвардс', 'darlene.edwards15@example.com', 'bricks');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Габриэль Джексон', 'gabriel.jackson91@example.com', 'hjkl');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Дэрил Брайант', 'daryl.bryant94@example.com', 'exodus');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Нил Паркер', 'neil.parker43@example.com', '878787');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Трэвис Райт', 'travis.wright36@example.com', 'smart');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Амелия Кэннеди', 'amelia.kennedy58@example.com', 'beaker');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Айда Дэвис', 'ida.davis80@example.com', 'pepsi1');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Джесси Паттерсон', 'jessie.patterson68@example.com', 'tommy');
+INSERT INTO users (id, name, email, login) VALUES (users_seq.nextval, 'Деннис Крейг', 'dennis.craig82@example.com', 'coldbeer');

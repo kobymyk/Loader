@@ -1,0 +1,15 @@
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, '﻿драма');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'криминал');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'фэнтези');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'детектив');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'мелодрама');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'биография');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'комедия');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'фантастика');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'боевик');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'триллер');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'приключения');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'аниме');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'мультфильм');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'семейный');
+INSERT INTO genre (id, name) VALUES (genre_seq.nextval, 'вестерн');
