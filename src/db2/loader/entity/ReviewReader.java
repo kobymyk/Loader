@@ -7,15 +7,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-/*
-  Read Movie fields
- */
-public class MovieReader implements Reader {
+public class ReviewReader implements Reader {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private LineReader lineReader;
 
-    public MovieReader(LineReader lineReader) {
+    public ReviewReader(LineReader lineReader) {
         this.lineReader = lineReader;
     }
 

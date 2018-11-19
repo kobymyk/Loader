@@ -1,9 +1,9 @@
 package db2.loader;
 
-import db2.loader.entity.GenreReader;
-import db2.loader.entity.MovieReader;
+import db2.loader.entity.*;
 import db2.loader.entity.Reader;
-import db2.loader.entity.UserReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -12,6 +12,7 @@ import java.io.*;
  generating INSERT statements
  */
 public class MdbLoader {
+    private static final Logger log = LoggerFactory.getLogger(MdbLoader.class);
     // todo: table of files
     public static void main(String[] args) {
         // todo: for (String item :
@@ -21,6 +22,7 @@ public class MdbLoader {
     }
 
     private static void load(String path) {
+        log.info("load:path={}", path);
         File fileIn = new File(path);
         File fileOut = new File(path + ".sql");
         String fileName = fileIn.getName();
@@ -28,22 +30,23 @@ public class MdbLoader {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileIn));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileOut))) {
 
-            Reader reader = null;
+            LineReader lineReader = new LineReader(bufferedReader, bufferedWriter);
+            Reader objectReader = null;
 
             if ("user.txt".equals(fileName)) {
-                reader = new UserReader(bufferedReader, bufferedWriter);
+                objectReader = new UserReader(lineReader);
             } else if ("genre.txt".equals(fileName)) {
-                reader = new GenreReader(bufferedReader, bufferedWriter);
+                objectReader = new GenreReader(bufferedReader, bufferedWriter);
             } else if ("movie.txt".equals(fileName)) {
-                reader = new MovieReader(bufferedReader, bufferedWriter);
+                objectReader = new MovieReader(lineReader);
             }
 
             Object object = null;
-            while ((object = reader.readObject()) != null) {
-                reader.writeObject(object);
+            while ((object = objectReader.readObject()) != null) {
+                objectReader.writeObject(object);
             }
             bufferedWriter.flush();
-            System.out.println(fileName + " loaded");
+            log.info("load::end");
         }
         catch (Exception e) {
             throw new RuntimeException(e);

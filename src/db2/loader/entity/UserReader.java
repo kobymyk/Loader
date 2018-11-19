@@ -5,28 +5,23 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 public class UserReader implements Reader {
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private LineReader lineReader;
 
-    public UserReader(BufferedReader reader, BufferedWriter writer) {
-        this.reader = reader;
-        this.writer = writer;
+    public UserReader(LineReader lineReader) {
+        this.lineReader = lineReader;
     }
 
     public User readObject() throws IOException {
         User result = new User();
 
-        result.name = reader.readLine();
+        result.name = lineReader.read();
         if (result.name == null) {
             return null;
         }
-        reader.readLine();
-        result.email = reader.readLine();
-        reader.readLine();
-        result.login = reader.readLine();
-        reader.readLine();
-        reader.readLine();
-        reader.readLine();
+        // email
+        result.email = lineReader.read();
+        // login
+        result.login = lineReader.read();
 
         return result;
     }
@@ -37,7 +32,6 @@ public class UserReader implements Reader {
             "VALUES (users_seq.nextval, " +
             "'" + value.name + '\'' + ", '" + value.email + '\'' + ", '" + value.login + '\'' +
             ");";
-        writer.write(sql);
-        writer.newLine();
+        lineReader.write(sql);
     }
 }
