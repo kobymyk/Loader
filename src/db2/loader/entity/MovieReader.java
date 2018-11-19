@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+/*
+  Read Movie fields
+ */
 public class MovieReader implements Reader {
     private BufferedReader reader;
     private BufferedWriter writer;
@@ -39,11 +42,8 @@ public class MovieReader implements Reader {
         // year
         result.releaseYear = Integer.parseInt(readLine());
         // issuers
-        list = readLine().split(", ");
-        for (String item : list) {
-            // splitStrings
-            result.issuers.add(item);
-        }
+        line = readLine();
+        result.setIssuers(line);
         // genres
         list = readLine().split(", ");
         for (String item : list) {
