@@ -31,11 +31,13 @@ public class ReviewReader implements Reader {
     }
 
     public Review readObject() throws IOException {
-        Review result = new Review();
-        result.movieName = lineReader.read();
-        if (result.movieName == null) {
+        String line = lineReader.read();
+        if (line == null) {
             return null;
         }
+
+        Review result = new Review();
+        result.movieName = line;
         result.userName = lineReader.read();
         result.reviewText = lineReader.read();
 
@@ -46,9 +48,9 @@ public class ReviewReader implements Reader {
         Review value = (Review) object;
         String userName = wrapText(value.userName);
         log.info("writeObject:userName={}", userName);
-        String reviewText = "text"; wrapText(value.reviewText);
+        String reviewText = wrapText(value.reviewText);
         String movieName = wrapText(value.movieName);
-        String sqlText = "INSERT INTO review (movie_id, user_name, review_text) SELECT (" +
+        String sqlText = "INSERT INTO review (movie_id, user_name, review_text) SELECT " +
                 "t.id, " + userName + ", " + reviewText +
                 " FROM movie t WHERE t.name = " + movieName + ";";
         lineReader.write(sqlText);
