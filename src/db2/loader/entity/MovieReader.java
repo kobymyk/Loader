@@ -1,5 +1,8 @@
 package db2.loader.entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,6 +11,8 @@ import java.io.IOException;
   Read Movie fields
  */
 public class MovieReader implements Reader {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private BufferedReader reader;
     private BufferedWriter writer;
 
@@ -18,6 +23,8 @@ public class MovieReader implements Reader {
 
     public String readLine() throws IOException {
         String result = reader.readLine();
+        log.trace(result);
+
         if ("".equals(result)) {
             result = readLine();
         }
@@ -25,31 +32,35 @@ public class MovieReader implements Reader {
     }
 
     public String wrapText(String text) {
-        String result = text.replace("'", "''");
-        return "'" + result + "'";
+        return "'" + text + "'";
+    }
+
+    public String wrapText(String text, boolean doReplace) {
+        String result = null;
+        if (doReplace) {
+            result = text.replace("'", "''");
+        } else {
+            result = text;
+        }
+        return wrapText(result);
     }
 
     public Movie readObject() throws IOException {
         Movie result = new Movie();
+        String[] list = null;
         String line = readLine();
+        log.info("readObject:line=" + line);
         if (line == null) {
             return null;
         }
         // names
-        String[] list = line.split("/");
-        result.name = list[0];
-        result.caption = list[1];
-        // year
+        result.setNameHeader(line);
         result.releaseYear = Integer.parseInt(readLine());
         // issuers
         line = readLine();
         result.setIssuers(line);
-        // genres
-        list = readLine().split(", ");
-        for (String item : list) {
-            result.genres.add(item);
-        }
-        // description
+
+        result.setGenres(readLine());
         result.description = readLine();
         // rating
         list = readLine().split(":");
@@ -66,7 +77,7 @@ public class MovieReader implements Reader {
         Movie value = (Movie) object;
         String sqlText = "INSERT INTO movie (id, name, caption, description, release_year, rating, price) VALUES (" +
                 "movie_seq.nextval, " +
-                wrapText(value.name) + ", " + wrapText(value.caption) + ", " + wrapText(value.description) + ", " +
+                wrapText(value.name) + ", " + wrapText(value.caption, true) + ", " + wrapText(value.description, true) + ", " +
                 value.releaseYear + ", " + value.rating + ", " + value.price +
             ");";
         writer.write(sqlText);

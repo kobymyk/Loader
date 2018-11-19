@@ -22,4 +22,15 @@ public class Movie {
             issuers.add(item);
         }
     }
+    public void setGenres(String line) {
+        String[] list = line.split(", ");
+        for (String item : list) {
+            genres.add(item);
+        }
+    }
+    public void setNameHeader(String line) {
+        String[] list = line.split("/");
+        name = list[0];
+        caption = list[1];
+    }
 }
