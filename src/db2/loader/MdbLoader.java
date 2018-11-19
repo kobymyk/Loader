@@ -18,7 +18,8 @@ public class MdbLoader {
         // todo: for (String item :
         //load("user.txt");
         //load("genre.txt");
-        load("movie.txt");
+        //load("movie.txt");
+        load("review.txt");
     }
 
     private static void load(String path) {
@@ -39,6 +40,8 @@ public class MdbLoader {
                 objectReader = new GenreReader(bufferedReader, bufferedWriter);
             } else if ("movie.txt".equals(fileName)) {
                 objectReader = new MovieReader(lineReader);
+            } else if ("review.txt".equals(fileName)) {
+                objectReader = new ReviewReader(lineReader);
             }
 
             Object object = null;

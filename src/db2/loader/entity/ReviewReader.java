@@ -30,55 +30,27 @@ public class ReviewReader implements Reader {
         return wrapText(result);
     }
 
-    public Movie readObject() throws IOException {
-        Movie result = new Movie();
-        String[] list = null;
-        String line = lineReader.read();
-        log.info("readObject:line={}", line);
-        if (line == null) {
+    public Review readObject() throws IOException {
+        Review result = new Review();
+        result.movieName = lineReader.read();
+        if (result.movieName == null) {
             return null;
         }
-        // names
-        result.setNameHeader(line);
-        result.releaseYear = Integer.parseInt(lineReader.read());
-        // issuers
-        line = lineReader.read();
-        result.setIssuers(line);
-
-        result.setGenres(lineReader.read());
-        result.description = lineReader.read();
-        // rating
-        list = lineReader.read().split(":");
-        result.rating = Double.parseDouble(list[1]);
-        // price
-        list = lineReader.read().split(":");
-        result.price = Double.parseDouble(list[1]);
+        result.userName = lineReader.read();
+        result.reviewText = lineReader.read();
 
         return result;
     }
 
     public void writeObject(Object object) throws IOException {
-        Movie value = (Movie) object;
-        String sqlText = "INSERT INTO movie (id, name, caption, description, release_year, rating, price) VALUES (" +
-                "movie_seq.nextval, " +
-                wrapText(value.name) + ", " + wrapText(value.caption, true) + ", " + wrapText(value.description, true) + ", " +
-                value.releaseYear + ", " + value.rating + ", " + value.price +
-            ");";
+        Review value = (Review) object;
+        String userName = wrapText(value.userName);
+        log.info("writeObject:userName={}", userName);
+        String reviewText = "text"; wrapText(value.reviewText);
+        String movieName = wrapText(value.movieName);
+        String sqlText = "INSERT INTO review (movie_id, user_name, review_text) SELECT (" +
+                "t.id, " + userName + ", " + reviewText +
+                " FROM movie t WHERE t.name = " + movieName + ";";
         lineReader.write(sqlText);
-        // movie_genre
-        for (String genre : value.genres) {
-            sqlText = "INSERT INTO movie_genre (movie_id, genre_id) SELECT " +
-                "movie_seq.currval, t.id FROM genre t WHERE t.name = " +
-                wrapText(genre) +
-                ";";
-            lineReader.write(sqlText);
-        }
-        // movie_issuer
-        for (String issuer : value.issuers) {
-            sqlText = "INSERT INTO movie_issuer (movie_id, issuer) SELECT " +
-                    "movie_seq.currval, " + wrapText(issuer) +
-                    " FROM dual;";
-            lineReader.write(sqlText);
-        }
     }
 }
