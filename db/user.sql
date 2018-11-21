@@ -1,0 +1,22 @@
+insert into user(id, nickname, email, password)
+values(1, 'Anonymous', 'anonymous.anonymous@example.com', AES_ENCRYPT('paco', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(2, 'Рональд Рейнольдс', 'ronald.reynolds66@example.com', AES_ENCRYPT('paco', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(3, 'Дарлин Эдвардс', 'darlene.edwards15@example.com', AES_ENCRYPT('bricks', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(4, 'Габриэль Джексон', 'gabriel.jackson91@example.com', AES_ENCRYPT('hjkl', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(5, 'Дэрил Брайант', 'daryl.bryant94@example.com', AES_ENCRYPT('exodus', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(6, 'Нил Паркер', 'neil.parker43@example.com', AES_ENCRYPT('878787', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(7, 'Трэвис Райт', 'travis.wright36@example.com', AES_ENCRYPT('smart', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(8, 'Амелия Кэннеди', 'amelia.kennedy58@example.com', AES_ENCRYPT('beaker', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(9, 'Айда Дэвис', 'ida.davis80@example.com', AES_ENCRYPT('pepsi1', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(10, 'Джесси Паттерсон', 'jessie.patterson68@example.com', AES_ENCRYPT('tommy', 'tlas_redloh_eivom'));
+insert into user(id, nickname, email, password)
+values(11, 'Деннис Крейг', 'dennis.craig82@example.com', AES_ENCRYPT('coldbeer', 'tlas_redloh_eivom'));
